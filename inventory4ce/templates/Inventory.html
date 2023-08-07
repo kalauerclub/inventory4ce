@@ -1,4 +1,5 @@
 {% extends "Framework.html" %} {% block content %}
+
 <body onload="onload()" />
 <div class="content text-white">
   <div class="title">
@@ -6,73 +7,37 @@
       <h1 class="subtitle">
         Overview
 
-        <button
-          type="button"
-          class="btn"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
+        <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fa-solid fa-plus"></i>
         </button>
         <div class="dropdown-menu">
           <div class="m-2 queueButton">
             <form class="info" autocomplete="off" method="POST">
               <div class="mb-3">
-                <input
-                  class="form-control"
-                  type="text"
-                  placeholder="ID"
-                  aria-label="ID"
-                  id="addid"
-                  name="addid"
-                />
+                <input class="form-control" type="text" placeholder="ID" aria-label="ID" id="addid" name="addid" />
                 <div class="form-text mx-2">Leave empty to generate ID</div>
               </div>
               <div class="mb-3">
-                <input
-                  class="form-control"
-                  type="text"
-                  placeholder="Name"
-                  aria-label="Name"
-                  id="name"
-                  name="name"
-                />
+                <input class="form-control" type="text" placeholder="Name" aria-label="Name" id="name" name="name" />
               </div>
               <div class="mb-3">
                 <select class="form-select" id="location" name="location">
-                  <option selected>Home-Assistant Schrank</option>
-                  <option >Pentest Schrank</option>
-                  <option >Spaß Schrank</option>
-                  <option >Pentest Tisch</option>
+                  <option selected>Office</option>
+                  <option value="Pentestdesk">Pentestdesk</option>
                 </select>
               </div>
               <div class="left mb-3 form-check">
-                <input
-                  type="checkbox"
-                  class="form-check-input"
-                  id="checkbox"
-                  name="checkbox"
-                  style="float: left"
-                />
+                <input type="checkbox" class="form-check-input" id="checkbox" name="checkbox" style="float: left" />
                 <label class="form-check-label">Print QR-Code</label>
               </div>
-              <button
-                type="submit"
-                class="btn btn-outline-success right"
-                style="float: right"
-              >
+              <button type="submit" class="btn btn-outline-success right" style="float: right">
                 Add
               </button>
             </form>
           </div>
         </div>
 
-        <button
-          type="button"
-          class="btn"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
+        <button type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
           <i class="fa-solid fa-minus"></i>
         </button>
 
@@ -80,21 +45,10 @@
           <div class="m-2 queueButton">
             <form class="info" method="POST">
               <div class="mb-3">
-                <input
-                  class="form-control"
-                  type="text"
-                  placeholder="ID"
-                  aria-label="ID"
-                  id="del"
-                  name="del"
-                />
+                <input class="form-control" type="text" placeholder="ID" aria-label="ID" id="del" name="del" />
               </div>
 
-              <button
-                type="submit"
-                class="btn btn-outline-danger right"
-                style="float: right"
-              >
+              <button type="submit" class="btn btn-outline-danger right" style="float: right">
                 Delete
               </button>
             </form>
@@ -104,21 +58,15 @@
 
       <div class="m-2 queueButton">
         <form class="d-flex">
-          <input
-            class="form-control mx-2 w-75"
-            type="text"
-            placeholder="Search"
-            aria-label="Search"
-            id="item"
-            name="item"
-          />
+          <input class="form-control mx-2 w-75" type="text" placeholder="Search" aria-label="Search" id="item"
+            name="item" />
           <button class="btn btn-outline-success" id="btn">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
         </form>
       </div>
     </div>
-    <div class="box container p-1">
+    <div class="box p-1">
       <span id="filter-count"> Items found:</span>
     </div>
     {% if invdata|length > 0 %}{% with data=["ItemID", "Name", "Available",
@@ -135,7 +83,7 @@
 
 <span id="statusBox">Idle...</span>
 
-<button class="btn btn-outline-red ms-5 mt-4" onclick="print_queue()">
+<button class="btn btn-outline-red ms-2 mt-4" onclick="print_queue()">
   Print queue of recent added Items
 </button>
 
@@ -211,15 +159,15 @@
 </script>
 
 <script>
-    {%if message != None%}
-      alertify.message("{{message}}");
-    {%endif%}
+  {%if message != None %}
+  alertify.message("{{message}}");
+  {% endif %}
 
-    {%if print_qr != None%}
-    let text =
+  {%if print_qr != None %}
+  let text =
     "text={{print_qr}}&font_family=Arial&font_style=Regular&font_size=45&label_size=d24&align=center&orientation=standard&margin_top=53&margin_bottom=35&margin_left=30&margin_right=35&print_type=qrcode&qrcode_size=9&qrcode_correction=L&print_count=1&image_bw_threshold=70&image_mode=black_and_white&line_spacing=118&shrink_or_wrap=wrap&cut_mode=cut";
   $.post("http://localhost:8013/labeldesigner/api/print", text);
-    {%endif%}
+  {% endif %}
 </script>
 <script src="js/spinner.js" />
 {% endblock %}
