@@ -2,10 +2,10 @@ services:
   web:
     build: .
     ports:
-      - "80:5000"
+      - "5000:5000"
   printer:
-      image: "pklaus/brother_ql_web"
-      ports:
-        - "8013:8013"
-      devices:
-        - '/dev/usb/lp0:/dev/usb/lp0'
+    image: "makefoo/brother_ql_web:latest"
+    ports:
+      - "8013:8013"
+    devices:
+      - '/dev/usb/lp0:/dev/usb/lp0'
