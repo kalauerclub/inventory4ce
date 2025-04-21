@@ -9,9 +9,8 @@ license = "MIT"
 python = "^3.10"
 flask = "^2.2.2"
 requests = "^2.28.2"
-brother-ql = "^0.9.4"
 qrcode = "^7.4.2"
-pyopenssl = "^23.2.0"
+cryptography = "^44.0.2"
 
 [tool.poetry.scripts]
 inventory4ce = "inventory4ce.app:run"
