@@ -19,7 +19,7 @@
       in
       {
         packages = {
-          inventory4ce = mkPoetryApplication { projectDir = self; };
+          inventory4ce = mkPoetryApplication { projectDir = ./.; };
           default = self.packages.${system}.inventory4ce;
         };
 
